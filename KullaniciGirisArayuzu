@@ -5,15 +5,23 @@ import java.awt.event.ActionListener;
 
 public class HesabaGirisArayuz {
 
-     static String olusmaad;
-    static String olusmasifre;
+    private static String olusmaad;
+    private static String olusmasifre;
+    private static String adi;
+    private static String passwordText;
 
-    public HesabaGirisArayuz(String ad, String sifre) {
+    /*public HesabaGirisArayuz(String ad, String sifre) {
         this.olusmaad = ad;
         this.olusmasifre = sifre;
-    }
+    }*/
+
+
 
     public static void main(String[] args) {
+        HesapOlusturmaArayuz a=new HesapOlusturmaArayuz();
+        olusmaad=a.getAdi();
+        olusmasifre=a.getPasswordText();
+
         JFrame frame4 = new JFrame("Hesaba giris");
 
         JLabel text = new JLabel("HESABA GIRIS");
@@ -30,7 +38,6 @@ public class HesabaGirisArayuz {
         sifre.setText("Sifre: ");
         sifre.setFont(new Font("Monospaced", Font.BOLD, 15));
         sifre.setBounds(100, 200, 150, 50);
-
 
         JTextField ad = new JTextField();
         ad.setFont(new Font("Monospaced", Font.BOLD, 15));
@@ -56,9 +63,8 @@ public class HesabaGirisArayuz {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                        String adi = ad.getText();
-                        //String passwordText = password.getText();
-                        String passwordText = new String(password.getPassword());
+                         adi = ad.getText();
+                         passwordText = new String(password.getPassword());
                          if (olusmaad.equals(adi) && olusmasifre.equals(passwordText)) {
                              Arayuz.main(args);
                              //pencerelerı kapattık
@@ -88,5 +94,21 @@ public class HesabaGirisArayuz {
         frame4.setVisible(true);
 
 
+    }
+
+    public  String getOlusmaad() {
+        return olusmaad;
+    }
+
+    public  void setOlusmaad(String olusmaad) {
+        HesabaGirisArayuz.olusmaad = olusmaad;
+    }
+
+    public  String getOlusmasifre() {
+        return olusmasifre;
+    }
+
+    public  void setOlusmasifre(String olusmasifre) {
+        HesabaGirisArayuz.olusmasifre = olusmasifre;
     }
 }
