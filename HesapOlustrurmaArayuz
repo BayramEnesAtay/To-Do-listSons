@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 public class HesapOlusturmaArayuz {
 
+        private static String passwordText;
+        private static String adi;
 
 
     public static void main(String[] args) {
@@ -49,9 +51,10 @@ public class HesapOlusturmaArayuz {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                String passwordText = new String(password.getPassword());
-                String adi=ad.getText();
-                HesabaGirisArayuz a=new HesabaGirisArayuz(adi,passwordText);
+                //yerel degiskenler private olamaz.
+                 passwordText = new String(password.getPassword());
+                 adi=ad.getText();
+                //HesabaGirisArayuz a=new HesabaGirisArayuz(adi,passwordText);
                 HesabaGirisArayuz.main(args);
                 //pencerelerı kapattık
                 frame3.dispose();
@@ -70,4 +73,22 @@ public class HesapOlusturmaArayuz {
         frame3.setLayout(null);
         frame3.setVisible(true);
     }
+
+
+    public  String getPasswordText() {
+        return passwordText;
+    }
+
+    public  void setPasswordText(String passwordText) {
+        HesapOlusturmaArayuz.passwordText = passwordText;
+    }
+
+    public  String getAdi() {
+        return adi;
+    }
+
+    public  void setAdi(String adi) {
+        HesapOlusturmaArayuz.adi = adi;
+    }
 }
+
