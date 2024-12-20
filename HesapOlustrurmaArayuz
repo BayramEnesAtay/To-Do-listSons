@@ -1,0 +1,73 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class HesapOlusturmaArayuz {
+
+
+
+    public static void main(String[] args) {
+
+        JFrame frame3=new JFrame("Hesap Olusturma");
+
+        JLabel text=new JLabel("HESAP OLUSTURMA");
+        text.setFont(new Font("Serif",Font.BOLD,20));
+        text.setBounds(100,70,250,50);
+
+        JLabel kullanici=new JLabel();
+        kullanici.setText("Kullanici Adi: ");
+        kullanici.setFont(new Font("Monospaced",Font.BOLD,15));
+        kullanici.setBounds(100,150,150,50);
+
+       JLabel sifre=new JLabel();
+        sifre.setText("Sifre: ");
+        sifre.setFont(new Font("Monospaced",Font.BOLD,15));
+        sifre.setBounds(100,200,150,50);
+
+
+        JTextField ad=new JTextField();
+        ad.setFont(new Font("Monospaced",Font.BOLD,15));
+        ad.setBounds(230,170,200,18);
+
+
+
+        JPasswordField password=new JPasswordField();
+        password.setFont(new Font("Monospaced",Font.BOLD,15));
+        password.setBounds(160,220,150,18);
+
+
+
+        JButton olustur=new JButton();
+        olustur.setText("OLUSTUR");
+        olustur.setFont(new Font("Monospaced",Font.BOLD,15));
+        olustur.setBounds(200,400,150,50);
+
+
+
+        olustur.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String passwordText = new String(password.getPassword());
+                String adi=ad.getText();
+                HesabaGirisArayuz a=new HesabaGirisArayuz(adi,passwordText);
+                HesabaGirisArayuz.main(args);
+                //pencerelerı kapattık
+                frame3.dispose();
+            }
+        });
+
+
+
+        frame3.add(olustur);
+        frame3.add(text);
+       frame3.add(password);
+        frame3.add(ad);
+        frame3.add(sifre);
+        frame3.add(kullanici);
+        frame3.setSize(600,600);
+        frame3.setLayout(null);
+        frame3.setVisible(true);
+    }
+}
