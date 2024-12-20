@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
-public class GorevEkleme extends OncelikException {
-    public static boolean isDecimal(String input)
+public class GorevEkleme extends Gorev {
+
+    public  boolean isDecimal(String input)
     {
         //virgul ıcerıp ıcermedıgını kontrol edıyo.
         return (input.contains(",")||input.contains("."));
@@ -25,7 +26,7 @@ public class GorevEkleme extends OncelikException {
         genelpanel.setLayout(new GridLayout(15,1));
     }
     //private olabılır
-    final int []y5={0};
+    private final int []y5={0};
     public void altpanelfonk() {
         JPanel altpanel;
         altpanel = new JPanel();
@@ -35,18 +36,19 @@ public class GorevEkleme extends OncelikException {
 
         JOptionPane gorevekleme = new JOptionPane();
         //private olabılır
-        String gorevmetni = JOptionPane.showInputDialog(gorevekleme, "Gorev giriniz:", "Gorev Ekleme", JOptionPane.INFORMATION_MESSAGE);
+        //hocam bir methodun icicdeki degiskenler yerel olur ve yereller private olamaz.
+        setGorevtext(JOptionPane.showInputDialog(gorevekleme, "Gorev giriniz:", "Gorev Ekleme", JOptionPane.INFORMATION_MESSAGE));
         frame.add(gorevekleme);
         frame.revalidate();
         frame.repaint();
 
         //private olabılır
-        String oncelik = null;
+
         int oncelikdeger = 0;
         try {
             JOptionPane oncelikalma = new JOptionPane();
-            oncelik = JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE);
-            oncelikdeger = Integer.parseInt(oncelik);
+            setOncelik(JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE));
+            oncelikdeger = Integer.parseInt(getOncelik());
             if (oncelikdeger > 5 || oncelikdeger < 1) {
                 throw new OncelikException();
 
@@ -56,7 +58,7 @@ public class GorevEkleme extends OncelikException {
             frame.repaint();
         } catch (OncelikException e) {
             System.out.println(e.getMessage());
-            oncelik="Hata";
+            setOncelik("Hata");
 
             while(oncelikdeger>5 || oncelikdeger<1)
             {
@@ -64,8 +66,8 @@ public class GorevEkleme extends OncelikException {
                 JOptionPane.showMessageDialog(oncelikhatasi, "Oncelik numarasi 1 ile 5 arasinda olmalidir.", "Oncelik Hatasi", JOptionPane.ERROR_MESSAGE);
                 frame.add(oncelikhatasi);
                 JOptionPane oncelikalma = new JOptionPane();
-                oncelik = JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE);
-                oncelikdeger = Integer.parseInt(oncelik);
+                setOncelik(JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE));
+                oncelikdeger = Integer.parseInt(getOncelik());
 
             }
 
@@ -83,14 +85,14 @@ public class GorevEkleme extends OncelikException {
                    JOptionPane.showMessageDialog(oncelikhatasi2, "Oncelik numarasi virgullu olamaz!!.", "Oncelik Hatasi", JOptionPane.ERROR_MESSAGE);
                    frame.add(oncelikhatasi2);
                    JOptionPane oncelikalma2 = new JOptionPane();
-                   oncelik = JOptionPane.showInputDialog(oncelikalma2, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE);
+                   setOncelik(JOptionPane.showInputDialog(oncelikalma2, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE));
                    frame.add(oncelikalma2);
 
-                   oncelikdeger = Integer.parseInt(oncelik);
+                   oncelikdeger = Integer.parseInt(getOncelik());
                }
                catch (NumberFormatException E)
                {
-                   if((!isDecimal(oncelik)) && (oncelikdeger<1 || oncelikdeger>5))
+                   if((!isDecimal(getOncelik())) && (oncelikdeger<1 || oncelikdeger>5))
                    {
                        while(oncelikdeger>5 || oncelikdeger<1)
                        {
@@ -99,8 +101,8 @@ public class GorevEkleme extends OncelikException {
                            JOptionPane.showMessageDialog(oncelikhatasi, "Oncelik numarasi 1 ile 5 arasinda olmalidir.", "Oncelik Hatasi", JOptionPane.ERROR_MESSAGE);
                            frame.add(oncelikhatasi);
                            JOptionPane oncelikalma = new JOptionPane();
-                           oncelik = JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE);
-                           oncelikdeger = Integer.parseInt(oncelik);
+                           setOncelik(JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE));
+                           oncelikdeger = Integer.parseInt(getOncelik());
 
                        }
 
@@ -110,7 +112,7 @@ public class GorevEkleme extends OncelikException {
                    }
                }
 
-                if((!isDecimal(oncelik)) && (oncelikdeger<1 || oncelikdeger>5))
+                if((!isDecimal(getOncelik())) && (oncelikdeger<1 || oncelikdeger>5))
                 {
                     while(oncelikdeger>5 || oncelikdeger<1)
                     {
@@ -119,8 +121,8 @@ public class GorevEkleme extends OncelikException {
                         JOptionPane.showMessageDialog(oncelikhatasi, "Oncelik numarasi 1 ile 5 arasinda olmalidir.", "Oncelik Hatasi", JOptionPane.ERROR_MESSAGE);
                         frame.add(oncelikhatasi);
                         JOptionPane oncelikalma = new JOptionPane();
-                        oncelik = JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE);
-                        oncelikdeger = Integer.parseInt(oncelik);
+                        setOncelik(JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE));
+                        oncelikdeger = Integer.parseInt(getOncelik());
 
                     }
 
@@ -129,7 +131,7 @@ public class GorevEkleme extends OncelikException {
 
                 }
             }
-            while(isDecimal(oncelik));
+            while(isDecimal(getOncelik()));
 
         }
        // catch()
@@ -147,7 +149,7 @@ public class GorevEkleme extends OncelikException {
 
 
         JTextField gorev = new JTextField();
-        gorev.setText(gorevmetni);
+        gorev.setText(getGorevtext());
         gorev.setFont(new Font("Monospaced", Font.BOLD, 15));
         altpanel.add(gorev);
         gorev.setMaximumSize(new Dimension(400, 90));
@@ -156,14 +158,16 @@ public class GorevEkleme extends OncelikException {
         genelpanel.repaint();
 
 
-        gorevlist.add(gorevmetni);
+
+        gorevlist.add(getGorevtext());
         TOPLAMGOREVSAYISI.setText("Toplam gorev sayisi: "+gorevlist.size());
 
 
         Date tarih = new Date();
         SimpleDateFormat tarihFormatter = new SimpleDateFormat("dd/MM/yyyy");
-        String formattedDate = tarihFormatter.format(tarih);
-        JLabel tarihLabel = new JLabel(formattedDate);
+
+        setTarih(tarihFormatter.format(tarih));
+        JLabel tarihLabel = new JLabel(getTarih());
         tarihLabel.setFont(new Font("Monospaced", Font.BOLD, 15));
         altpanel.add(tarihLabel);
         tarihLabel.setMaximumSize(new Dimension(180, 50));
@@ -173,8 +177,8 @@ public class GorevEkleme extends OncelikException {
 
 
         SimpleDateFormat saatFormatter=new SimpleDateFormat("HH:mm");
-        String formattedTime =saatFormatter.format(tarih);
-        JLabel saatLabel = new JLabel(formattedTime);
+        setSaat(saatFormatter.format(tarih));
+        JLabel saatLabel = new JLabel(getSaat());
         saatLabel.setFont(new Font("Monospaced", Font.BOLD, 15));
         altpanel.add(saatLabel);
         saatLabel.setMaximumSize(new Dimension(100, 50));
@@ -183,7 +187,7 @@ public class GorevEkleme extends OncelikException {
 
         //ıcı yazılacak
         JLabel onceliklabel = new JLabel();
-        onceliklabel.setText(oncelik);
+        onceliklabel.setText(getOncelik());
         onceliklabel.setFont(new Font("Monospaced", Font.BOLD, 15));
         onceliklabel.setMaximumSize(new Dimension(50, 50));
         altpanel.add(onceliklabel);
