@@ -1,0 +1,9 @@
+public class OncelikException extends Exception{
+    public OncelikException(){
+        super("Oncelik numarasi 1 ile 5 arasinda girilmelidir!!!");
+    }
+    public OncelikException(String message){
+        super(message);
+    }
+
+}
