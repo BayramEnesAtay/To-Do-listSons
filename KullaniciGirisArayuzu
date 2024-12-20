@@ -1,0 +1,92 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class HesabaGirisArayuz {
+
+     static String olusmaad;
+    static String olusmasifre;
+
+    public HesabaGirisArayuz(String ad, String sifre) {
+        this.olusmaad = ad;
+        this.olusmasifre = sifre;
+    }
+
+    public static void main(String[] args) {
+        JFrame frame4 = new JFrame("Hesaba giris");
+
+        JLabel text = new JLabel("HESABA GIRIS");
+        text.setFont(new Font("Serif", Font.BOLD, 20));
+        text.setBounds(100, 70, 250, 50);
+
+        JLabel kullanici = new JLabel();
+        kullanici.setText("Kullanici Adi: ");
+        kullanici.setFont(new Font("Monospaced", Font.BOLD, 15));
+        kullanici.setBounds(100, 150, 150, 50);
+
+
+        JLabel sifre = new JLabel();
+        sifre.setText("Sifre: ");
+        sifre.setFont(new Font("Monospaced", Font.BOLD, 15));
+        sifre.setBounds(100, 200, 150, 50);
+
+
+        JTextField ad = new JTextField();
+        ad.setFont(new Font("Monospaced", Font.BOLD, 15));
+        ad.setBounds(230, 170, 200, 18);
+
+
+
+        JPasswordField password = new JPasswordField();
+        password.setFont(new Font("Monospaced", Font.BOLD, 15));
+        password.setBounds(160, 220, 150, 18);
+
+
+
+        JButton giris = new JButton();
+        giris.setText("GIRIS");
+        giris.setFont(new Font("Monospaced", Font.BOLD, 15));
+        giris.setBounds(200, 400, 150, 50);
+
+
+        giris.addActionListener(new ActionListener() {
+
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                        String adi = ad.getText();
+                        //String passwordText = password.getText();
+                        String passwordText = new String(password.getPassword());
+                         if (olusmaad.equals(adi) && olusmasifre.equals(passwordText)) {
+                             Arayuz.main(args);
+                             //pencerelerı kapattık
+                             frame4.dispose();
+                         }
+                         else {
+                             JOptionPane uyari=new JOptionPane();
+                             JOptionPane.showMessageDialog(uyari,"Kullanici adi veya sifre hatali","Hatali giris",JOptionPane.WARNING_MESSAGE);
+                             uyari.setFont(new Font("Monospaced", Font.BOLD, 15));
+                             frame4.add(uyari);
+                         }
+
+
+
+                }
+
+        });
+
+        frame4.add(giris);
+        frame4.add(text);
+        frame4.add(password);
+        frame4.add(ad);
+        frame4.add(sifre);
+        frame4.add(kullanici);
+        frame4.setSize(600, 600);
+        frame4.setLayout(null);
+        frame4.setVisible(true);
+
+
+    }
+}
