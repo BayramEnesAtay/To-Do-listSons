@@ -1,0 +1,230 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
+public class GorevEkleme extends OncelikException {
+    public static boolean isDecimal(String input)
+    {
+        //virgul ıcerıp ıcermedıgını kontrol edıyo.
+        return (input.contains(",")||input.contains("."));
+    }
+
+    ArrayList<String>gorevlist=new ArrayList<>();
+    //JPanel altpanel;
+    JPanel genelpanel;
+    JFrame frame;
+    JLabel TOPLAMGOREVSAYISI=new JLabel();
+    public GorevEkleme(JPanel genelpanel, JFrame frame,JLabel TOPLAMGOREVSAYISI) {
+        this.genelpanel = genelpanel;
+        this.frame=frame;
+        this.TOPLAMGOREVSAYISI=TOPLAMGOREVSAYISI;
+        genelpanel.setLayout(new GridLayout(15,1));
+    }
+    //private olabılır
+    final int []y5={0};
+    public void altpanelfonk() {
+        JPanel altpanel;
+        altpanel = new JPanel();
+        altpanel.setLayout(new BoxLayout(altpanel, BoxLayout.X_AXIS));
+        altpanel.setBounds(0, y5[0], 800, 50);
+        y5[0] += 50;
+
+        JOptionPane gorevekleme = new JOptionPane();
+        //private olabılır
+        String gorevmetni = JOptionPane.showInputDialog(gorevekleme, "Gorev giriniz:", "Gorev Ekleme", JOptionPane.INFORMATION_MESSAGE);
+        frame.add(gorevekleme);
+        frame.revalidate();
+        frame.repaint();
+
+        //private olabılır
+        String oncelik = null;
+        int oncelikdeger = 0;
+        try {
+            JOptionPane oncelikalma = new JOptionPane();
+            oncelik = JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE);
+            oncelikdeger = Integer.parseInt(oncelik);
+            if (oncelikdeger > 5 || oncelikdeger < 1) {
+                throw new OncelikException();
+
+            }
+            frame.add(oncelikalma);
+            frame.revalidate();
+            frame.repaint();
+        } catch (OncelikException e) {
+            System.out.println(e.getMessage());
+            oncelik="Hata";
+
+            while(oncelikdeger>5 || oncelikdeger<1)
+            {
+                JOptionPane oncelikhatasi = new JOptionPane();
+                JOptionPane.showMessageDialog(oncelikhatasi, "Oncelik numarasi 1 ile 5 arasinda olmalidir.", "Oncelik Hatasi", JOptionPane.ERROR_MESSAGE);
+                frame.add(oncelikhatasi);
+                JOptionPane oncelikalma = new JOptionPane();
+                oncelik = JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE);
+                oncelikdeger = Integer.parseInt(oncelik);
+
+            }
+
+
+
+
+        }
+        catch(NumberFormatException e)
+        {
+            System.out.println("Oncelik no virgullu girilemez!!");
+            do {
+
+               try {
+                   JOptionPane oncelikhatasi2 = new JOptionPane();
+                   JOptionPane.showMessageDialog(oncelikhatasi2, "Oncelik numarasi virgullu olamaz!!.", "Oncelik Hatasi", JOptionPane.ERROR_MESSAGE);
+                   frame.add(oncelikhatasi2);
+                   JOptionPane oncelikalma2 = new JOptionPane();
+                   oncelik = JOptionPane.showInputDialog(oncelikalma2, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE);
+                   frame.add(oncelikalma2);
+
+                   oncelikdeger = Integer.parseInt(oncelik);
+               }
+               catch (NumberFormatException E)
+               {
+                   if((!isDecimal(oncelik)) && (oncelikdeger<1 || oncelikdeger>5))
+                   {
+                       while(oncelikdeger>5 || oncelikdeger<1)
+                       {
+
+                           JOptionPane oncelikhatasi = new JOptionPane();
+                           JOptionPane.showMessageDialog(oncelikhatasi, "Oncelik numarasi 1 ile 5 arasinda olmalidir.", "Oncelik Hatasi", JOptionPane.ERROR_MESSAGE);
+                           frame.add(oncelikhatasi);
+                           JOptionPane oncelikalma = new JOptionPane();
+                           oncelik = JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE);
+                           oncelikdeger = Integer.parseInt(oncelik);
+
+                       }
+
+
+
+
+                   }
+               }
+
+                if((!isDecimal(oncelik)) && (oncelikdeger<1 || oncelikdeger>5))
+                {
+                    while(oncelikdeger>5 || oncelikdeger<1)
+                    {
+
+                        JOptionPane oncelikhatasi = new JOptionPane();
+                        JOptionPane.showMessageDialog(oncelikhatasi, "Oncelik numarasi 1 ile 5 arasinda olmalidir.", "Oncelik Hatasi", JOptionPane.ERROR_MESSAGE);
+                        frame.add(oncelikhatasi);
+                        JOptionPane oncelikalma = new JOptionPane();
+                        oncelik = JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE);
+                        oncelikdeger = Integer.parseInt(oncelik);
+
+                    }
+
+
+
+
+                }
+            }
+            while(isDecimal(oncelik));
+
+        }
+       // catch()
+        finally {
+            //programın devam etmesını saglıyor.
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        }
+
+
+        JCheckBox c1 = new JCheckBox();
+        altpanel.add(c1, 0);
+
+        genelpanel.revalidate();
+        genelpanel.repaint();
+
+
+        JTextField gorev = new JTextField();
+        gorev.setText(gorevmetni);
+        gorev.setFont(new Font("Monospaced", Font.BOLD, 15));
+        altpanel.add(gorev);
+        gorev.setMaximumSize(new Dimension(400, 90));
+        gorev.setBackground(Color.lightGray);
+        genelpanel.revalidate();
+        genelpanel.repaint();
+
+
+        gorevlist.add(gorevmetni);
+        TOPLAMGOREVSAYISI.setText("Toplam gorev sayisi: "+gorevlist.size());
+
+
+        Date tarih = new Date();
+        SimpleDateFormat tarihFormatter = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = tarihFormatter.format(tarih);
+        JLabel tarihLabel = new JLabel(formattedDate);
+        tarihLabel.setFont(new Font("Monospaced", Font.BOLD, 15));
+        altpanel.add(tarihLabel);
+        tarihLabel.setMaximumSize(new Dimension(180, 50));
+        genelpanel.revalidate();
+        genelpanel.repaint();
+
+
+
+        SimpleDateFormat saatFormatter=new SimpleDateFormat("HH:mm");
+        String formattedTime =saatFormatter.format(tarih);
+        JLabel saatLabel = new JLabel(formattedTime);
+        saatLabel.setFont(new Font("Monospaced", Font.BOLD, 15));
+        altpanel.add(saatLabel);
+        saatLabel.setMaximumSize(new Dimension(100, 50));
+        genelpanel.revalidate();
+        genelpanel.repaint();
+
+        //ıcı yazılacak
+        JLabel onceliklabel = new JLabel();
+        onceliklabel.setText(oncelik);
+        onceliklabel.setFont(new Font("Monospaced", Font.BOLD, 15));
+        onceliklabel.setMaximumSize(new Dimension(50, 50));
+        altpanel.add(onceliklabel);
+        genelpanel.revalidate();
+        genelpanel.repaint();
+
+        JButton carpi = new JButton();
+        carpi.setFont(new Font("Monospaced", Font.BOLD, 15));
+        carpi.setText("X");
+        altpanel.add(carpi);
+        carpi.setBackground(Color.red);
+        genelpanel.revalidate();
+        genelpanel.repaint();
+
+        carpi.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                genelpanel.remove(altpanel);
+                genelpanel.revalidate();
+
+                genelpanel.repaint();
+
+
+            }
+
+        });
+
+
+
+        genelpanel.add(altpanel);
+
+
+    }
+
+   /* @Override
+    public void actionPerformed(ActionEvent e) {
+        genelpanel.remove(altpanel);
+        genelpanel.revalidate();
+        genelpanel.repaint();
+    }*/
+
+
+}
