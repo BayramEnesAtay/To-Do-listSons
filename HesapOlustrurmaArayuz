@@ -45,8 +45,7 @@ public class HesapOlusturmaArayuz {
         olustur.setFont(new Font("Monospaced",Font.BOLD,15));
         olustur.setBounds(200,400,150,50);
 
-
-
+        olustur.setBackground(Color.green);
         olustur.addActionListener(new ActionListener(){
 
             @Override
@@ -55,14 +54,22 @@ public class HesapOlusturmaArayuz {
                  passwordText = new String(password.getPassword());
                  adi=ad.getText();
                 //HesabaGirisArayuz a=new HesabaGirisArayuz(adi,passwordText);
-                HesabaGirisArayuz.main(args);
-                //pencerelerı kapattık
-                frame3.dispose();
+                    if(passwordText.isEmpty() || adi.isEmpty())
+                    {
+                        JOptionPane uyari=new JOptionPane();
+                        JOptionPane.showMessageDialog(uyari,"Alanlar bos birakilamaz!!!","HATA",JOptionPane.ERROR_MESSAGE);
+                        frame3.add(uyari);
+
+                    }
+                 else {
+                        HesabaGirisArayuz.main(args);
+                        //pencerelerı kapattık
+                        frame3.dispose();
+                    }
+
             }
         });
-
-
-
+        frame3.getContentPane().setBackground(Color.YELLOW);
         frame3.add(olustur);
         frame3.add(text);
        frame3.add(password);
@@ -75,7 +82,7 @@ public class HesapOlusturmaArayuz {
     }
 
 
-    public  String getPasswordText() {
+    public static String getPasswordText() {
         return passwordText;
     }
 
@@ -83,7 +90,7 @@ public class HesapOlusturmaArayuz {
         HesapOlusturmaArayuz.passwordText = passwordText;
     }
 
-    public  String getAdi() {
+    public static String getAdi() {
         return adi;
     }
 
@@ -91,4 +98,6 @@ public class HesapOlusturmaArayuz {
         HesapOlusturmaArayuz.adi = adi;
     }
 }
+
+
 
