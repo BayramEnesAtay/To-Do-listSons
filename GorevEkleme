@@ -217,18 +217,11 @@ public class GorevEkleme extends Gorev {
         });
 
 
-
         genelpanel.add(altpanel);
 
 
     }
 
-   /* @Override
-    public void actionPerformed(ActionEvent e) {
-        genelpanel.remove(altpanel);
-        genelpanel.revalidate();
-        genelpanel.repaint();
-    }*/
 
 
 }
