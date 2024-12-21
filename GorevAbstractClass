@@ -1,9 +1,9 @@
 public abstract class Gorev {
 
-    private String gorevtext;
-    private String tarih;
-    private String saat;
-    private String oncelik;
+    private static String gorevtext;
+    private static String tarih;
+    private static String saat;
+    private static String oncelik;
 
 
     public abstract  boolean isDecimal(String input);
@@ -11,7 +11,7 @@ public abstract class Gorev {
 
 
 
-    public String getGorevtext() {
+    public static String getGorevtext() {
         return gorevtext;
     }
 
@@ -35,7 +35,7 @@ public abstract class Gorev {
         this.saat = saat;
     }
 
-    public String getOncelik() {
+    public static String getOncelik() {
         return oncelik;
     }
 
@@ -44,3 +44,4 @@ public abstract class Gorev {
     }
 
 }
+
