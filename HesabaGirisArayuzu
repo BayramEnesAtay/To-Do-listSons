@@ -55,7 +55,7 @@ public class HesabaGirisArayuz {
         giris.setText("GIRIS");
         giris.setFont(new Font("Monospaced", Font.BOLD, 15));
         giris.setBounds(200, 400, 150, 50);
-
+        giris.setBackground(Color.green);
 
         giris.addActionListener(new ActionListener() {
 
@@ -82,7 +82,7 @@ public class HesabaGirisArayuz {
                 }
 
         });
-
+        frame4.getContentPane().setBackground(Color.YELLOW);
         frame4.add(giris);
         frame4.add(text);
         frame4.add(password);
