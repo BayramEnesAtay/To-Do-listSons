@@ -59,7 +59,7 @@ public class Arayuz {
             @Override
             public void actionPerformed(ActionEvent e) {
                 b.altpanelfonk();
-
+                DosyaIslemleri.main();
             }
         });
         frame.add(toplamgorev);
@@ -82,7 +82,7 @@ public class Arayuz {
 
 
 
-//dosya islemlerı olacak.
+
 
 
 
