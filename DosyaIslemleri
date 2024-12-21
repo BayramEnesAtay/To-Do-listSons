@@ -1,0 +1,43 @@
+import java.io.*;
+
+public class DosyaIslemleri extends HesapOlusturmaArayuz {
+  private static String gorev;
+    private static String oncelik_no;
+    private static String dosyaadi;
+
+    public static void main() {
+        dosyaadi=getAdi()+".txt";
+        gorev=Gorev.getGorevtext();
+        oncelik_no=Gorev.getOncelik();
+
+        File dosya=new File(dosyaadi);
+
+        try {
+            boolean dosyadurumu=false;
+
+            if(!dosya.exists()){
+                dosya.createNewFile();
+                dosyadurumu=true;
+            }
+            BufferedWriter bw =new BufferedWriter(new FileWriter(dosya,true));
+            if (dosyadurumu) {
+                bw.write("GÖREVLER                ÖNCELİK NO");
+                bw.newLine();
+                bw.write("----------------        -------------");
+                bw.newLine();
+            }
+            //dosya ya hızalı bir sekılde yazdırılmasını sagladım.
+            bw.write(String.format("%-20s%10s",gorev,oncelik_no));
+            bw.newLine();
+            bw.close();
+
+        }
+        catch(IOException e){
+            System.out.println("Dosya olusturulamadi veya yazilamadi!!!");
+        }
+    }
+
+    public boolean isDecimal(String input) {
+        return false;
+    }
+}
