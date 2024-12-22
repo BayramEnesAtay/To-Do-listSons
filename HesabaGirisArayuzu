@@ -2,28 +2,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//gerekli kutuphaneler dahil edildi.
 public class HesabaGirisArayuz {
-
+    //degisken private tanimlandi.
     private static String olusmaad;
     private static String olusmasifre;
     private static String adi;
     private static String passwordText;
 
-    /*public HesabaGirisArayuz(String ad, String sifre) {
-        this.olusmaad = ad;
-        this.olusmasifre = sifre;
-    }*/
-
-
-
     public static void main(String[] args) {
         HesapOlusturmaArayuz a=new HesapOlusturmaArayuz();
         olusmaad=a.getAdi();
         olusmasifre=a.getPasswordText();
-
+        //getter metodu ile degisken degerleri alindi.
+        //arayuz olusturuldu.
         JFrame frame4 = new JFrame("Hesaba giris");
-
+        //gererkli olan bilesenler swing yardımıyla tanımlandı.
         JLabel text = new JLabel("HESABA GIRIS");
         text.setFont(new Font("Serif", Font.BOLD, 20));
         text.setBounds(100, 70, 250, 50);
@@ -43,12 +37,10 @@ public class HesabaGirisArayuz {
         ad.setFont(new Font("Monospaced", Font.BOLD, 15));
         ad.setBounds(230, 170, 200, 18);
 
-
-
+        //sifre icin bilesen tanimlandı.
         JPasswordField password = new JPasswordField();
         password.setFont(new Font("Monospaced", Font.BOLD, 15));
         password.setBounds(160, 220, 150, 18);
-
 
 
         JButton giris = new JButton();
@@ -56,32 +48,34 @@ public class HesabaGirisArayuz {
         giris.setFont(new Font("Monospaced", Font.BOLD, 15));
         giris.setBounds(200, 400, 150, 50);
         giris.setBackground(Color.green);
-
+        //butona basildigi anda olusacak durumlar yazildi.
         giris.addActionListener(new ActionListener() {
 
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                         adi = ad.getText();
-                         passwordText = new String(password.getPassword());
-                         if (olusmaad.equals(adi) && olusmasifre.equals(passwordText)) {
-                             Arayuz.main(args);
-                             //pencerelerı kapattık
-                             frame4.dispose();
-                         }
-                         else {
-                             JOptionPane uyari=new JOptionPane();
-                             JOptionPane.showMessageDialog(uyari,"Kullanici adi veya sifre hatali","Hatali giris",JOptionPane.WARNING_MESSAGE);
-                             uyari.setFont(new Font("Monospaced", Font.BOLD, 15));
-                             frame4.add(uyari);
-                         }
-
-
-
+                //ad ve sifre kontrolu yapıldı.
+                adi = ad.getText();
+                passwordText = new String(password.getPassword());
+                if (olusmaad.equals(adi) && olusmasifre.equals(passwordText)) {
+                    Arayuz.main(args);
+                    //pencerelerı kapattık
+                    frame4.dispose();
+                }
+                else {
+                    //bilgi kutucugu ile erkana uyarilar verdik.
+                    JOptionPane uyari=new JOptionPane();
+                    JOptionPane.showMessageDialog(uyari,"Kullanici adi veya sifre hatali","Hatali giris",JOptionPane.WARNING_MESSAGE);
+                    uyari.setFont(new Font("Monospaced", Font.BOLD, 15));
+                    frame4.add(uyari);
                 }
 
+
+
+            }
+
         });
+        //butun bilesneleri frame ekledik ve renk ayarları yapıldı.
         frame4.getContentPane().setBackground(Color.YELLOW);
         frame4.add(giris);
         frame4.add(text);
@@ -95,7 +89,7 @@ public class HesabaGirisArayuz {
 
 
     }
-
+    //setter ve getter metodları tanımlandı.
     public  String getOlusmaad() {
         return olusmaad;
     }
