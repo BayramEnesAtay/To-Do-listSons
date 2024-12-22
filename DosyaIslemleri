@@ -1,24 +1,29 @@
 import java.io.*;
-
+//HesapOlusturmaArayuzunden kalıtıldı cunku ordan getter ile degiskenler alınacak.
 public class DosyaIslemleri extends HesapOlusturmaArayuz {
-  private static String gorev;
+    //degiskenler private tanimlandı.
+    private static String gorev;
     private static String oncelik_no;
     private static String dosyaadi;
 
     public static void main() {
+        //kullanıcı adını .txt ile birlestirerek dosya adını hazırladık.
         dosyaadi=getAdi()+".txt";
+        //gorev ve oncelık no lar cekildi
         gorev=Gorev.getGorevtext();
         oncelik_no=Gorev.getOncelik();
 
         File dosya=new File(dosyaadi);
 
         try {
+            //Topic (baslik)yazdirmasi icin  gerekli olan boolen degısken tanımladık ve asagıda kullandık.
             boolean dosyadurumu=false;
 
             if(!dosya.exists()){
                 dosya.createNewFile();
                 dosyadurumu=true;
             }
+            //buffered riter kullanılarak dosyaya ekleme modunda yazma islemi yapıldı.
             BufferedWriter bw =new BufferedWriter(new FileWriter(dosya,true));
             if (dosyadurumu) {
                 bw.write("GÖREVLER                ÖNCELİK NO");
@@ -26,12 +31,14 @@ public class DosyaIslemleri extends HesapOlusturmaArayuz {
                 bw.write("----------------        -------------");
                 bw.newLine();
             }
-            //dosya ya hızalı bir sekılde yazdırılmasını sagladım.
+            //dosya ya hızalı bir sekılde yazdırılmasını sagladık.
             bw.write(String.format("%-20s%10s",gorev,oncelik_no));
             bw.newLine();
+            //dosyayı kapattık.
             bw.close();
 
         }
+        //Olası bir hata durumunda ekrana hata mesajını yazdırdık.
         catch(IOException e){
             System.out.println("Dosya olusturulamadi veya yazilamadi!!!");
         }
@@ -41,3 +48,4 @@ public class DosyaIslemleri extends HesapOlusturmaArayuz {
         return false;
     }
 }
+
