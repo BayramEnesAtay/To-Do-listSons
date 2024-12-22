@@ -3,18 +3,17 @@ import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//gerekli olan kutuphaneler tanımlandı.
 public class Arayuz {
     public static void main(String[] args) {
-
+        //arayuz(pencere)olustu.
         JFrame frame=new JFrame("TO-DO LIST");
 
-
+        //gerekli olan bilesenler olsuturuldu ve ayarlari yapildi.
         JButton ekleme=new JButton("Gorev Ekle");
         ekleme.setFont(new Font("Monospaced",Font.BOLD,15));
         ekleme.setBounds(200,650,400,75);
         ekleme.setBackground(new Color(210,180,140));
-
 
         JLabel label1=new JLabel("TO-DO LIST");
         label1.setForeground(new Color(150,75,0));
@@ -45,23 +44,25 @@ public class Arayuz {
         toplamgorev.setForeground(Color.blue);
         toplamgorev.setFont(new Font("Monospaced",Font.BOLD,15));
         toplamgorev.setBounds(590,720,200,50);
-
-
+        //frame'in icinde buyuk bir panel olusturuldu.
         JPanel buyukpanel=new JPanel();
         buyukpanel.setLayout(null);
+        //Buyukpanelın boyutu ve konumu verildi.
         buyukpanel.setBounds(0,120,800,500);
-
-        AltPanel a=new AltPanel(buyukpanel,frame);
+        //Gorevekleme de ıhtıyac olan bilesenleri constructor yardımıyla gonderdik.
         GorevEkleme b=new GorevEkleme(buyukpanel,frame,toplamgorev);
-
+        //ekleme butonuna basildiginda gerceklesecek islemler verildi.
         ekleme.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Goreveklemedeki method calıstırldı.
                 b.altpanelfonk();
+                //Dosyaya kaydetmesi icin de dosya sınıfındaki main calıstırıldı.
                 DosyaIslemleri.main();
             }
         });
+        //tum bilesenler frame eklendı ve renk ayari yapıldı.
         frame.add(toplamgorev);
         buyukpanel.setBackground(new Color(242,242,242));
         frame.getContentPane().setBackground(new Color(235,194,174));
@@ -79,6 +80,16 @@ public class Arayuz {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
