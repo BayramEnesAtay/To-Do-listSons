@@ -5,17 +5,18 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-
+//gerekli olan kutuphaneler dahil edildi.
+//GorevEkleme sinifi Gorev soyut sınıfından kalıtıldı.
 public class GorevEkleme extends Gorev {
-
+    //bu method yardımıyla oncelık no vırgul kontrol edıldı.
     public  boolean isDecimal(String input)
     {
         //virgul ıcerıp ıcermedıgını kontrol edıyo.
         return (input.contains(",")||input.contains("."));
     }
-
+    //gorevlerı ekledıgımız arraylist tanımlandı.
     ArrayList<String>gorevlist=new ArrayList<>();
-    //JPanel altpanel;
+    //Arayuz sınıfından gereklı olan bılesenlerı constructor yardımıyla aldık.
     JPanel genelpanel;
     JFrame frame;
     JLabel TOPLAMGOREVSAYISI=new JLabel();
@@ -23,43 +24,52 @@ public class GorevEkleme extends Gorev {
         this.genelpanel = genelpanel;
         this.frame=frame;
         this.TOPLAMGOREVSAYISI=TOPLAMGOREVSAYISI;
+        //genelpanelin layout(duzenini)  grıdlayout satıra sutun ayarladık.
         genelpanel.setLayout(new GridLayout(15,1));
     }
-    //private olabılır
+    //altpanelımızın konumu icin dizi tanimladik.
+    //final dizi olmasının sebebi ilerde inner class da kullanacagız.
     private final int []y5={0};
     public void altpanelfonk() {
+        //altpanel olusturuldu.
         JPanel altpanel;
         altpanel = new JPanel();
+        //altpanelin duzeni boxlayout yapıldı yani x boyutunda sıralam ya da y boyutunda.
         altpanel.setLayout(new BoxLayout(altpanel, BoxLayout.X_AXIS));
         altpanel.setBounds(0, y5[0], 800, 50);
         y5[0] += 50;
 
         JOptionPane gorevekleme = new JOptionPane();
-        //private olabılır
-        //hocam bir methodun icicdeki degiskenler yerel olur ve yereller private olamaz.
+        //gerekli olan bilesenler yardımıyla gorev alindi.
+        //Bir methodun icindeki degiskenler yerel olur ve yereller private olamaz.
         setGorevtext(JOptionPane.showInputDialog(gorevekleme, "Gorev giriniz:", "Gorev Ekleme", JOptionPane.INFORMATION_MESSAGE));
         frame.add(gorevekleme);
         frame.revalidate();
         frame.repaint();
 
-        //private olabılır
-
         int oncelikdeger = 0;
+        //try catch yapısı kullanılark oncelık no kontrolu yapıldı.
         try {
             JOptionPane oncelikalma = new JOptionPane();
             setOncelik(JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE));
+            //girilen oncelik degeri integera cevrildi.
             oncelikdeger = Integer.parseInt(getOncelik());
+            //aykırı durumda tanımladıgımız hata sınıfında turden bır hata fırlatıldı.
             if (oncelikdeger > 5 || oncelikdeger < 1) {
                 throw new OncelikException();
 
             }
             frame.add(oncelikalma);
+            //paneller yenilendi.
             frame.revalidate();
+            //goruntu yenilendi.
             frame.repaint();
-        } catch (OncelikException e) {
+        }
+        //catch ile hata yonetımı saglandı.
+        catch (OncelikException e) {
             System.out.println(e.getMessage());
             setOncelik("Hata");
-
+            //dongu yardımıyla uygun oncelık no gırılmesı saglanmıstır.
             while(oncelikdeger>5 || oncelikdeger<1)
             {
                 JOptionPane oncelikhatasi = new JOptionPane();
@@ -71,46 +81,47 @@ public class GorevEkleme extends Gorev {
 
             }
 
-
-
-
         }
+        //virgullu sayi girildigi durum catch ile yakalandı.
         catch(NumberFormatException e)
         {
             System.out.println("Oncelik no virgullu girilemez!!");
+            //do-while ile uygun oncelık no girilmesi saglandı.
             do {
 
-               try {
-                   JOptionPane oncelikhatasi2 = new JOptionPane();
-                   JOptionPane.showMessageDialog(oncelikhatasi2, "Oncelik numarasi virgullu olamaz!!.", "Oncelik Hatasi", JOptionPane.ERROR_MESSAGE);
-                   frame.add(oncelikhatasi2);
-                   JOptionPane oncelikalma2 = new JOptionPane();
-                   setOncelik(JOptionPane.showInputDialog(oncelikalma2, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE));
-                   frame.add(oncelikalma2);
+                try {
+                    //bırden cok vırgullu sayi girildiginde olusacak hata yakalandı.
+                    JOptionPane oncelikhatasi2 = new JOptionPane();
+                    JOptionPane.showMessageDialog(oncelikhatasi2, "Oncelik numarasi virgullu olamaz!!.", "Oncelik Hatasi", JOptionPane.ERROR_MESSAGE);
+                    frame.add(oncelikhatasi2);
+                    JOptionPane oncelikalma2 = new JOptionPane();
+                    setOncelik(JOptionPane.showInputDialog(oncelikalma2, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE));
+                    frame.add(oncelikalma2);
 
-                   oncelikdeger = Integer.parseInt(getOncelik());
-               }
-               catch (NumberFormatException E)
-               {
-                   if((!isDecimal(getOncelik())) && (oncelikdeger<1 || oncelikdeger>5))
-                   {
-                       while(oncelikdeger>5 || oncelikdeger<1)
-                       {
+                    oncelikdeger = Integer.parseInt(getOncelik());
+                }
+                //virgullu sayıdan sonra sınırlardan fazla tam sayı gırmeyı onlemek icin hata yonetımı yapıldı.
+                catch (NumberFormatException E)
+                {
+                    if((!isDecimal(getOncelik())) && (oncelikdeger<1 || oncelikdeger>5))
+                    {
+                        while(oncelikdeger>5 || oncelikdeger<1)
+                        {
 
-                           JOptionPane oncelikhatasi = new JOptionPane();
-                           JOptionPane.showMessageDialog(oncelikhatasi, "Oncelik numarasi 1 ile 5 arasinda olmalidir.", "Oncelik Hatasi", JOptionPane.ERROR_MESSAGE);
-                           frame.add(oncelikhatasi);
-                           JOptionPane oncelikalma = new JOptionPane();
-                           setOncelik(JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE));
-                           oncelikdeger = Integer.parseInt(getOncelik());
+                            JOptionPane oncelikhatasi = new JOptionPane();
+                            JOptionPane.showMessageDialog(oncelikhatasi, "Oncelik numarasi 1 ile 5 arasinda olmalidir.", "Oncelik Hatasi", JOptionPane.ERROR_MESSAGE);
+                            frame.add(oncelikhatasi);
+                            JOptionPane oncelikalma = new JOptionPane();
+                            setOncelik(JOptionPane.showInputDialog(oncelikalma, "Gorevin oncelik numarasini giriniz (1-5)", "ONCELIK", JOptionPane.PLAIN_MESSAGE));
+                            oncelikdeger = Integer.parseInt(getOncelik());
 
-                       }
-
-
+                        }
 
 
-                   }
-               }
+
+
+                    }
+                }
 
                 if((!isDecimal(getOncelik())) && (oncelikdeger<1 || oncelikdeger>5))
                 {
@@ -126,15 +137,13 @@ public class GorevEkleme extends Gorev {
 
                     }
 
-
-
-
                 }
             }
+            //oncelıgın vırgullu oldugu surece dongude kalması saglanmıstır.
             while(isDecimal(getOncelik()));
 
         }
-       // catch()
+        // her turlu durumda devam eder.
         finally {
             //programın devam etmesını saglıyor.
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -143,11 +152,12 @@ public class GorevEkleme extends Gorev {
 
         JCheckBox c1 = new JCheckBox();
         altpanel.add(c1, 0);
-
+        //panel yenilendi.
         genelpanel.revalidate();
+        //goruntu yenilendi.
         genelpanel.repaint();
 
-
+        //goorevin tutulacagı bılesen tanımlandı.
         JTextField gorev = new JTextField();
         gorev.setText(getGorevtext());
         gorev.setFont(new Font("Monospaced", Font.BOLD, 15));
@@ -162,7 +172,7 @@ public class GorevEkleme extends Gorev {
         gorevlist.add(getGorevtext());
         TOPLAMGOREVSAYISI.setText("Toplam gorev sayisi: "+gorevlist.size());
 
-
+        //Tarih formatlama islemleri gereceklestirildi.
         Date tarih = new Date();
         SimpleDateFormat tarihFormatter = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -175,7 +185,7 @@ public class GorevEkleme extends Gorev {
         genelpanel.repaint();
 
 
-
+        //Saat formatlama islemi gerceklestırıldı.
         SimpleDateFormat saatFormatter=new SimpleDateFormat("HH:mm");
         setSaat(saatFormatter.format(tarih));
         JLabel saatLabel = new JLabel(getSaat());
@@ -185,7 +195,7 @@ public class GorevEkleme extends Gorev {
         genelpanel.revalidate();
         genelpanel.repaint();
 
-        //ıcı yazılacak
+
         JLabel onceliklabel = new JLabel();
         onceliklabel.setText(getOncelik());
         onceliklabel.setFont(new Font("Monospaced", Font.BOLD, 15));
@@ -201,11 +211,13 @@ public class GorevEkleme extends Gorev {
         carpi.setBackground(Color.red);
         genelpanel.revalidate();
         genelpanel.repaint();
-
+        //carpi butonuna basıldıgı anda olusacak durumlar yazıldı.
         carpi.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                //buyuk panelden kucukpanel cıkartıldı
+                //tum satır sılınmıs oldu.
                 genelpanel.remove(altpanel);
                 genelpanel.revalidate();
 
@@ -216,12 +228,8 @@ public class GorevEkleme extends Gorev {
 
         });
 
-
         genelpanel.add(altpanel);
 
-
     }
-
-
 
 }
