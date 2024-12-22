@@ -2,17 +2,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//gerekli kutuphaneler tanimlandı
 public class HesapOlusturmaArayuz {
-
-        private static String passwordText;
-        private static String adi;
+    //degiskenlerımız private olarak tanımlandı.
+    private static String passwordText;
+    private static String adi;
 
 
     public static void main(String[] args) {
 
         JFrame frame3=new JFrame("Hesap Olusturma");
-
+        //gerekli bilesenler tanimlandi ve frame eklendi.
+        //bilesenlerin ayari ve konumlari yapıldi.
         JLabel text=new JLabel("HESAP OLUSTURMA");
         text.setFont(new Font("Serif",Font.BOLD,20));
         text.setBounds(100,70,250,50);
@@ -22,7 +23,7 @@ public class HesapOlusturmaArayuz {
         kullanici.setFont(new Font("Monospaced",Font.BOLD,15));
         kullanici.setBounds(100,150,150,50);
 
-       JLabel sifre=new JLabel();
+        JLabel sifre=new JLabel();
         sifre.setText("Sifre: ");
         sifre.setFont(new Font("Monospaced",Font.BOLD,15));
         sifre.setBounds(100,200,150,50);
@@ -32,47 +33,46 @@ public class HesapOlusturmaArayuz {
         ad.setFont(new Font("Monospaced",Font.BOLD,15));
         ad.setBounds(230,170,200,18);
 
-
-
         JPasswordField password=new JPasswordField();
         password.setFont(new Font("Monospaced",Font.BOLD,15));
         password.setBounds(160,220,150,18);
-
-
 
         JButton olustur=new JButton();
         olustur.setText("OLUSTUR");
         olustur.setFont(new Font("Monospaced",Font.BOLD,15));
         olustur.setBounds(200,400,150,50);
-
+        //olusturdugumuz button a basıldıgında gerceklesecek olan ıslemler yazıldı.
         olustur.setBackground(Color.green);
         olustur.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 //yerel degiskenler private olamaz.
-                 passwordText = new String(password.getPassword());
-                 adi=ad.getText();
+                passwordText = new String(password.getPassword());
+                adi=ad.getText();
                 //HesabaGirisArayuz a=new HesabaGirisArayuz(adi,passwordText);
-                    if(passwordText.isEmpty() || adi.isEmpty())
-                    {
-                        JOptionPane uyari=new JOptionPane();
-                        JOptionPane.showMessageDialog(uyari,"Alanlar bos birakilamaz!!!","HATA",JOptionPane.ERROR_MESSAGE);
-                        frame3.add(uyari);
+                //bos alan kontrolu yapıldu.
+                if(passwordText.isEmpty() || adi.isEmpty())
+                {
+                    JOptionPane uyari=new JOptionPane();
+                    JOptionPane.showMessageDialog(uyari,"Alanlar bos birakilamaz!!!","HATA",JOptionPane.ERROR_MESSAGE);
+                    frame3.add(uyari);
 
-                    }
-                 else {
-                        HesabaGirisArayuz.main(args);
-                        //pencerelerı kapattık
-                        frame3.dispose();
-                    }
+                }
+                else {
+                    //eger bılgıler uyusuyorsa diger arayuze yonlendirdik.
+                    HesabaGirisArayuz.main(args);
+                    //pencerelerı kapattık
+                    frame3.dispose();
+                }
 
             }
         });
+        //butun bilesenler frame eklendi.
         frame3.getContentPane().setBackground(Color.YELLOW);
         frame3.add(olustur);
         frame3.add(text);
-       frame3.add(password);
+        frame3.add(password);
         frame3.add(ad);
         frame3.add(sifre);
         frame3.add(kullanici);
@@ -81,7 +81,7 @@ public class HesapOlusturmaArayuz {
         frame3.setVisible(true);
     }
 
-
+    //private tanimlanan degiskenler icin getter ve setter metodları tanımlandı.
     public static String getPasswordText() {
         return passwordText;
     }
@@ -98,6 +98,9 @@ public class HesapOlusturmaArayuz {
         HesapOlusturmaArayuz.adi = adi;
     }
 }
+
+
+
 
 
 
