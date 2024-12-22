@@ -1,4 +1,6 @@
+//exception sınıfından kalıtım yapıldı.
 public class OncelikException extends Exception{
+    //constructor yardımıyla hata olusacagı zamankı mesaj degeri verildi.
     public OncelikException(){
         super("Oncelik numarasi 1 ile 5 arasinda girilmelidir!!!");
     }
@@ -7,4 +9,5 @@ public class OncelikException extends Exception{
     }
 
 }
+
 
