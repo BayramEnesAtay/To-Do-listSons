@@ -1,1 +1,1 @@
-# Java ve Swing kütüphanesi kullarak TO-DO List uygulaması yapıldı.
+# Java ve Swing kütüphanesi kullanılarak TO-DO List uygulaması yapıldı.
